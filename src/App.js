@@ -1,166 +1,56 @@
-// /client/App.js
-import React, { Component } from "react";
-import axios from "axios";
+import React, { Component } from 'react';
+import { Link } from "react-router-dom";
+import { Layout, Menu, Breadcrumb, Icon } from 'antd';
+
+const { SubMenu } = Menu;
+const { Header, Content, Sider } = Layout;
 
 class App extends Component {
-  // initialize our state 
-  state = {
-    data: [],
-    id: 0,
-    message: null,
-    intervalIsSet: false,
-    idToDelete: null,
-    idToUpdate: null,
-    objectToUpdate: null
-  };
-
-  // when component mounts, first thing it does is fetch all existing data in our db
-  // then we incorporate a polling logic so that we can easily see if our db has 
-  // changed and implement those changes into our UI
-  componentDidMount() {
-    this.getDataFromDb();
-    if (!this.state.intervalIsSet) {
-      let interval = setInterval(this.getDataFromDb, 1000);
-      this.setState({ intervalIsSet: interval });
-    }
-  }
-
-  // never let a process live forever 
-  // always kill a process everytime we are done using it
-  componentWillUnmount() {
-    if (this.state.intervalIsSet) {
-      clearInterval(this.state.intervalIsSet);
-      this.setState({ intervalIsSet: null });
-    }
-  }
-
-  // just a note, here, in the front end, we use the id key of our data object 
-  // in order to identify which we want to Update or delete.
-  // for our back end, we use the object id assigned by MongoDB to modify 
-  // data base entries
-
-  // our first get method that uses our backend api to 
-  // fetch data from our data base
-  getDataFromDb = () => {
-    fetch("/api/getData")
-      .then(data => data.json())
-      .then(res => this.setState({ data: res.data }));
-  };
-
-  // our put method that uses our backend api
-  // to create new query into our data base
-  putDataToDB = message => {
-    let currentIds = this.state.data.map(data => data.id);
-    let idToBeAdded = 0;
-    while (currentIds.includes(idToBeAdded)) {
-      ++idToBeAdded;
-    }
-
-    axios.post("/api/putData", {
-      id: idToBeAdded,
-      message: message
-    });
-  };
-
-
-  // our delete method that uses our backend api 
-  // to remove existing database information
-  deleteFromDB = idTodelete => {
-    let objIdToDelete = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idTodelete) {
-        objIdToDelete = dat._id;
-      }
-    });
-
-    axios.delete("/api/deleteData", {
-      data: {
-        id: objIdToDelete
-      }
-    });
-  };
-
-
-  // our update method that uses our backend api
-  // to overwrite existing data base information
-  updateDB = (idToUpdate, updateToApply) => {
-    let objIdToUpdate = null;
-    this.state.data.forEach(dat => {
-      if (dat.id == idToUpdate) {
-        objIdToUpdate = dat._id;
-      }
-    });
-
-    axios.post("/api/updateData", {
-      id: objIdToUpdate,
-      update: { message: updateToApply }
-    });
-  };
-
-
-  // here is our UI
-  // it is easy to understand their functions when you 
-  // see them render into our screen
   render() {
-    const { data } = this.state;
     return (
-      <div>
-        <ul>
-          {data.length <= 0
-            ? "NO DB ENTRIES YET"
-            : data.map(dat => (
-                <li style={{ padding: "10px" }} key={data.message}>
-                  <span style={{ color: "gray" }}> id: </span> {dat.id} <br />
-                  <span style={{ color: "gray" }}> data: </span>
-                  {dat.message}
-                </li>
-              ))}
-        </ul>
-        <div style={{ padding: "10px" }}>
-          <input
-            type="text"
-            onChange={e => this.setState({ message: e.target.value })}
-            placeholder="add something in the database"
-            style={{ width: "200px" }}
-          />
-          <button onClick={() => this.putDataToDB(this.state.message)}>
-            ADD
-          </button>
-        </div>
-        <div style={{ padding: "10px" }}>
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ idToDelete: e.target.value })}
-            placeholder="put id of item to delete here"
-          />
-          <button onClick={() => this.deleteFromDB(this.state.idToDelete)}>
-            DELETE
-          </button>
-        </div>
-        <div style={{ padding: "10px" }}>
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ idToUpdate: e.target.value })}
-            placeholder="id of item to update here"
-          />
-          <input
-            type="text"
-            style={{ width: "200px" }}
-            onChange={e => this.setState({ updateToApply: e.target.value })}
-            placeholder="put new value of the item here"
-          />
-          <button
-            onClick={() =>
-              this.updateDB(this.state.idToUpdate, this.state.updateToApply)
-            }
-          >
-            UPDATE
-          </button>
-        </div>
-      </div>
-    );
+      <Layout>
+      <Header className="header">
+      <div className="logo" />
+      <Menu
+      theme="dark"
+      mode="horizontal"
+      defaultSelectedKeys={['2']}
+      style={{ lineHeight: '64px' }}
+      >
+      <Menu.Item key="1"><Link to={'user-new'}>New User</Link></Menu.Item>
+      <Menu.Item key="2">nav 2</Menu.Item>
+      <Menu.Item key="3">nav 3</Menu.Item>
+      </Menu>
+      </Header>
+      <Layout>
+      <Sider width={200} style={{ background: '#fff' }}>
+      <Menu
+      mode="inline"
+      defaultSelectedKeys={['1']}
+      defaultOpenKeys={['sub1']}
+      style={{ height: '100%', borderRight: 0 }}
+      >
+        <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
+          <Menu.Item key="1">option1</Menu.Item>
+          <Menu.Item key="2">option2</Menu.Item>
+          <Menu.Item key="3">option3</Menu.Item>
+          <Menu.Item key="4">option4</Menu.Item>
+        </SubMenu>
+      </Menu>
+      </Sider>
+      <Layout style={{ padding: '0 24px 24px' }}>
+      <Breadcrumb style={{ margin: '16px 0' }}>
+      <Breadcrumb.Item>Home</Breadcrumb.Item>
+      <Breadcrumb.Item>List</Breadcrumb.Item>
+      <Breadcrumb.Item>App</Breadcrumb.Item>
+      </Breadcrumb>
+      <Content style={{ background: '#fff', padding: 24, margin: 0, minHeight: 280 }}>
+      {this.props.children}
+      </Content>
+      </Layout>
+      </Layout>
+      </Layout>
+      );
   }
 }
 
