@@ -11,6 +11,8 @@ import NoMatch from './container/NoMatch';
 import Home from './container/Home';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+import NewMessage from './container/NewMessage';
+
 
 
 render (
@@ -20,6 +22,7 @@ render (
         <Route path="/" exact component={Home}/>
         <Route path="/user-new" component={NewUser}/>
         <Route path="/user" component={User}/>
+        <Route path="/message-new" component={NewMessage}/>
 
         <Route component={NoMatch}/>
       </Switch>

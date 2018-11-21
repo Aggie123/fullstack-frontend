@@ -20,8 +20,7 @@ class NewUserForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        // request.postDataNew('/api/addUser',values);
-        request.postData("/api/addUser",values);
+        request.postDataNew("/api/putData",values);
 
       }else{
         console.error(err);
@@ -29,38 +28,32 @@ class NewUserForm extends React.Component {
     });
   }
 
-  getDataFromDb = () => {
-    fetch("/api/getData")
-      .then(data => data.json())
-      .then(res => this.setState({ data: res.data }));
-  };
-
   render() {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
-    const userNameError = isFieldTouched('userName') && getFieldError('userName');
-    const userAgeError = isFieldTouched('age') && getFieldError('age');
+    const messageError = isFieldTouched('message') && getFieldError('message');
+    const idError = isFieldTouched('age') && getFieldError('age');
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <FormItem
-          validateStatus={userNameError ? 'error' : ''}
-          help={userNameError || ''}
+          validateStatus={messageError ? 'error' : ''}
+          help={messageError || ''}
         >
-          {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+          {getFieldDecorator('message', {
+            rules: [{ required: true, message: 'Please input your message!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="message" />
           )}
         </FormItem>
         <FormItem
-          validateStatus={userAgeError ? 'error' : ''}
-          help={userAgeError || ''}
+          validateStatus={idError ? 'error' : ''}
+          help={idError || ''}
         >
-          {getFieldDecorator('age', {
-            rules: [{ required: true, message: 'Please input your age!' }],
+          {getFieldDecorator('id', {
+            rules: [{ required: true, message: 'Please input your id!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Age" />
+            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="id" />
           )}
         </FormItem>
         <FormItem>
@@ -84,7 +77,7 @@ export default class NewUser extends Component {
   render() {
     return (
       <div>
-        <h2>New User:</h2>
+        <h2>New Message:</h2>
         <WrappedNewUserForm/>
       </div>
     )

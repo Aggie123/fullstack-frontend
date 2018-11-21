@@ -56,10 +56,6 @@ class App extends Component {
       ++idToBeAdded;
     }
 
-    axios.post("/api/putData", {
-      id: idToBeAdded,
-      message: message
-    });
   };
 
 

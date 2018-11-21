@@ -1,12 +1,13 @@
-// import axios from "axios";
+import axios from "axios";
 
 let request={
 
-  getData: async (url,params) =>{
+  async postData (url,params){
+
     let initConfig={
       method: 'POST',
       credentials: 'include', // cookies
-      cache: 'no-cache ', // cookies
+      // mode: 'no-cors ', 
       headers: {
         'Content-Type':'application/x-www-form-urlencoded'
       },
@@ -14,7 +15,8 @@ let request={
     };
 
     try{
-      let response = fetch(url,initConfig);
+      let response = await fetch(url,initConfig);
+      console.log('response',response);
       if(!response){
         throw new Error('No response!');
       }else{
@@ -35,6 +37,12 @@ let request={
     }
 
   },
+
+  async postDataNew (url,params) {
+
+    axios.post(url, params);
+
+  }
 
 }
 
