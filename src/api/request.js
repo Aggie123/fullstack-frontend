@@ -38,6 +38,11 @@ let request={
 
   },
 
+  async getData(url){
+    console.log('get',url)
+    axios.get(url);
+  },
+
   async postDataNew (url,params) {
 
     axios.post(url, params);

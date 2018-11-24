@@ -20,6 +20,7 @@ render (
     <App>
       <Switch>
         <Route path="/" exact component={Home}/>
+        <Route path="/home" component={Home}/>
         <Route path="/user-new" component={NewUser}/>
         <Route path="/user" component={User}/>
         <Route path="/message-new" component={NewMessage}/>

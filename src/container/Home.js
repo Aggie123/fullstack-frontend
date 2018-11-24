@@ -1,6 +1,12 @@
 import React, { Component } from 'react';
+import request from '../api/request';
 
-export default class NoMatch extends Component {
+export default class Home extends Component {
+
+	ComponentDidMount(){
+		console.log('home')
+		request.getData('/')
+	}
 
   render() {
     return (

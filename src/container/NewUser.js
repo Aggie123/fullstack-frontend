@@ -20,7 +20,7 @@ class NewUserForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        request.postDataNew('/api/user/new',values);
+        request.postDataNew('/user/new',values);
         // request.postData("/api/user/new",values);
 
       }else{

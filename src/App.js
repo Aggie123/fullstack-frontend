@@ -4,6 +4,7 @@ import { Layout, Menu, Breadcrumb, Icon } from 'antd';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+const MenuItem=Menu.Item;
 
 class App extends Component {
   render() {
@@ -17,9 +18,9 @@ class App extends Component {
       defaultSelectedKeys={['2']}
       style={{ lineHeight: '64px' }}
       >
-      <Menu.Item key="1"><Link to={'user-new'}>New User</Link></Menu.Item>
-      <Menu.Item key="2"><Link to={'message-new'}>New Message</Link></Menu.Item>
-      <Menu.Item key="3">nav 3</Menu.Item>
+        <MenuItem key="1"><Link to={'home'}>Home</Link></MenuItem>
+        <MenuItem key="2"><Link to={'user-new'}>New User</Link></MenuItem>
+        <MenuItem key="3"><Link to={'message-new'}>New Message</Link></MenuItem>
       </Menu>
       </Header>
       <Layout>
@@ -31,10 +32,10 @@ class App extends Component {
       style={{ height: '100%', borderRight: 0 }}
       >
         <SubMenu key="sub1" title={<span><Icon type="user" />subnav 1</span>}>
-          <Menu.Item key="1">option1</Menu.Item>
-          <Menu.Item key="2">option2</Menu.Item>
-          <Menu.Item key="3">option3</Menu.Item>
-          <Menu.Item key="4">option4</Menu.Item>
+          <MenuItem key="1">option1</MenuItem>
+          <MenuItem key="2">option2</MenuItem>
+          <MenuItem key="3">option3</MenuItem>
+          <MenuItem key="4">option4</MenuItem>
         </SubMenu>
       </Menu>
       </Sider>
