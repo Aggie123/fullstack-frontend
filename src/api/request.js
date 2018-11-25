@@ -16,7 +16,6 @@ let request={
 
     try{
       let response = await fetch(url,initConfig);
-      console.log('response',response);
       if(!response){
         throw new Error('No response!');
       }else{
@@ -39,7 +38,6 @@ let request={
   },
 
   async getData(url){
-    console.log('get',url)
     axios.get(url);
   },
 
