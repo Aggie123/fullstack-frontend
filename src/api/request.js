@@ -1,5 +1,7 @@
 import axios from "axios";
 
+const apiUrl='127.0.0.1:3001/api'
+
 let request={
 
   async postData (url,params){
@@ -42,8 +44,11 @@ let request={
   },
 
   async postDataNew (url,params) {
+    // console.log('postDataNew',url,`${apiUrl}${url}`,params);
 
+    //axios.post(`${apiUrl}${url}`, params);
     axios.post(url, params);
+
 
   }
 
