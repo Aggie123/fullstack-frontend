@@ -50,7 +50,8 @@ class App extends Component {
             defaultSelectedKeys={['1']}
             defaultOpenKeys={['sub1']}
             style={{ height: '100%', borderRight: 0 }}
-            >
+            > 
+              <MenuItem key='home'><Link to={'/home'}><Icon type="user" />概述</Link></MenuItem>
               <SubMenu key="user" title={<span><Icon type="user" />用户画像</span>}>
                 <MenuItem key="u-1"><Link to={'/user-overall'}>概览</Link></MenuItem>
                 <MenuItem key="u-2"><Link to={'/user-lifecycle'}>用户生命周期</Link></MenuItem>
