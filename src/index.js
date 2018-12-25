@@ -7,6 +7,8 @@ import './index.css';
 
 import User from './container/User';
 import NewUser from './container/NewUser';
+import UserOverall from './container/user/overall';
+
 import NoMatch from './container/NoMatch';
 import Home from './container/Home';
 import App from './App';
@@ -22,6 +24,7 @@ render (
         <Route path="/" exact component={Home}/>
         <Route path="/home" component={Home}/>
         <Route path="/user-new" component={NewUser}/>
+        <Route path="/user-overall" component={UserOverall}/>
         <Route path="/user" component={User}/>
         <Route path="/message-new" component={NewMessage}/>
 
