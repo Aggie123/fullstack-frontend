@@ -30,9 +30,9 @@ class App extends Component {
           style={{ lineHeight: '64px' }}
           >
             <MenuItem key='1'>分析平台</MenuItem>
+            <MenuItem key="3"><Link to={'/user-new'}>New User</Link></MenuItem>
             {/*<MenuItem key="1"><Link to={'/home'}>Home</Link></MenuItem>
             <MenuItem key="2"><Link to={'/analysis'}>分析</Link></MenuItem>
-            <MenuItem key="3"><Link to={'/user-new'}>New User</Link></MenuItem>
             <MenuItem key="4"><Link to={'/message-new'}>New Message</Link></MenuItem>*/}
           </Menu>
         </Header>
