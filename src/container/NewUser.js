@@ -20,7 +20,8 @@ class NewUserForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        request.postDataNew('/user/new',values);
+        request.postDataNew('/api/user/test',values)
+        request.postDataNew('/api/user/new',values);
         // request.postData("/api/user/new",values);
 
       }else{
@@ -39,18 +40,18 @@ class NewUserForm extends React.Component {
     const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
 
     // Only show error after a field is touched.
-    const userNameError = isFieldTouched('userName') && getFieldError('userName');
+    const nameError = isFieldTouched('name') && getFieldError('name');
     const userAgeError = isFieldTouched('age') && getFieldError('age');
     return (
       <Form layout="inline" onSubmit={this.handleSubmit}>
         <FormItem
-          validateStatus={userNameError ? 'error' : ''}
-          help={userNameError || ''}
+          validateStatus={nameError ? 'error' : ''}
+          help={nameError || ''}
         >
-          {getFieldDecorator('userName', {
-            rules: [{ required: true, message: 'Please input your username!' }],
+          {getFieldDecorator('name', {
+            rules: [{ required: true, message: 'Please input your name!' }],
           })(
-            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="Username" />
+            <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)' }} />} placeholder="name" />
           )}
         </FormItem>
         <FormItem
