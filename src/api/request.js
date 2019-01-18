@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const apiUrl='127.0.0.1:3001/api'
+// const apiUrl='127.0.0.1:3001/api'
 
 let request={
 

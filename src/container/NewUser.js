@@ -13,6 +13,7 @@ class NewUserForm extends React.Component {
     // To disabled submit button at the beginning.
     this.props.form.validateFields();
     // this.getDataFromDb();
+    request.getData('/api/user/list');
   }
 
   handleSubmit = (e) => {
@@ -20,7 +21,8 @@ class NewUserForm extends React.Component {
     this.props.form.validateFields((err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        request.postDataNew('/api/user/test',values)
+        // request.postDataNew('/api/user/test',values)
+        request.getData('/api/user/list');
         request.postDataNew('/api/user/new',values);
         // request.postData("/api/user/new",values);
 
